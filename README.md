@@ -5,10 +5,10 @@ This is the start to what I hope will become a bigger project (maybe a web app) 
 
 One of my favorite low-investment hobbies is creating playlists on Spotify. It's fun to try and find a line through songs that normally wouldn't go together, or try to change the mood of a playlist as a listener moves through it. A fond memory I have as a kid is my dad taking the time to create individualized mixtapes on CDs for me and my siblings when we were too little to use iTunes. 
 
-My motivation going into this project was to learn more about how Spotify measures the audio qualities of a song and study how those qualities change over time across a playlist. It's a ways from being there yet, but in the meantime, here's a [cool Medium article](https://towardsdatascience.com/the-art-of-creating-a-mixtape-a-data-science-approach-1902065b1d1d) that talks about mixtapes and the various measured audio features of Spotify tracks. 
+My motivation going into this project was to learn more about how Spotify measures the audio qualities of a song and study how those qualities change over time across a playlist. It's a ways from being there yet, but in the meantime, here's a <a href="https://towardsdatascience.com/the-art-of-creating-a-mixtape-a-data-science-approach-1902065b1d1d" target="_blank">cool Medium article</a> that talks about mixtapes and the various measured audio features of Spotify tracks. 
 
 ## Usage
-[Node.js](https://nodejs.org/en/) is necessary to run this project, as are your own [Spotify client credentials](https://developer.spotify.com/dashboard/). 
+<a href="https://nodejs.org/en/" target="_blank">Node.js</a> is necessary to run this project, as are your own <a href="https://developer.spotify.com/dashboard/" target="_blank">Spotify client credentials</a>. 
 - Download both .js files into the same directory. 
 - Edit apiRequests.js and substitute your client credentials for 'process.env.SPOTIFY_CLIENT_ID' and 'process.env.SPOTIFY_CLIENT_SECRET.' 
 - Edit consoleFunctions.js by adding your own track or playlist IDs to the function call arguments.
@@ -33,5 +33,5 @@ Paste that link into a web browser and copy this portion:
   <img src="assets/images/link-id.png" alt="URL with highlighted portion"/>
 
 ## Credits
-- Thanks to Ritvik Biswas for his [very helpful Medium article](https://ritvikbiswas.medium.com/connecting-to-the-spotify-api-using-node-js-and-axios-client-credentials-flow-c769e2bee818) on how to perform the client credentials flow to acesss the Spotify API with the axios library 
-- [Spotify's Web API documentation](https://developer.spotify.com/documentation/web-api/)
+- Thanks to Ritvik Biswas for his <a href = "https://ritvikbiswas.medium.com/connecting-to-the-spotify-api-using-node-js-and-axios-client-credentials-flow-c769e2bee818" target= "_blank">very helpful Medium article</a> on how to perform the client credentials flow to acesss the Spotify API with the axios library 
+- <a href = "https://developer.spotify.com/documentation/web-api/" target= "_blank">Spotify's Web API documentation</a> 
