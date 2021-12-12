@@ -12,7 +12,7 @@
 
 const axios = require('axios').default; // axios library
 const qs = require('qs'); // contains JSON 'stringify' utility
-require('dotenv').config(); // used to create environment variables file .env (client credentials) 
+//require('dotenv').config(); // used to create environment variables file .env (client credentials) 
 
 var client_id = process.env.SPOTIFY_CLIENT_ID;
 var client_secret = process.env.SPOTIFY_CLIENT_SECRET;
