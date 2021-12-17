@@ -3,7 +3,7 @@
  * to print JSON data from Spotify to the console. 
  */
 
-let { getAudioFeatures, getPlaylistItems, getTrack } = require('./apiRequests'); 
+let { getAudioFeatures, getPlaylistItems, getTrack } = require('./src/apiRequests'); 
 
 /**
  * Return an array of track IDs from a specified playlist, 
