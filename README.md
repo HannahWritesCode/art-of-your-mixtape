@@ -16,6 +16,7 @@ Coming soon...
 
 A node.js project that pulls data from the Spotify Web API and prints playlist data to the console.
 <details>
+  
 ## Description
 
 This is the start to what I hope will become a bigger project (maybe a web app) in the future! I wanted to learn how to pull data from a public API and become more familiar with JavaScript. I feel I have a much better understanding of asynchronous functions and Promises after doing this project.
