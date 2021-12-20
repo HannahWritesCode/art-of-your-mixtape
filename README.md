@@ -2,10 +2,20 @@
 
 Coming soon...
 
+### TODO
+
+- [x] set up base react.js app (front end)
+- [ ] connect node.js express backend
+- [ ] create /getToken route in backend
+- [ ] complete PlaylistHeader component
+- [ ] complete SongBreakdown component
+- [ ] design line chart for Analysis component? 
+- [ ] styling
+
 ## v1 (playlist-analyzer)
 
 A node.js project that pulls data from the Spotify Web API and prints playlist data to the console.
-
+<details>
 ## Description
 
 This is the start to what I hope will become a bigger project (maybe a web app) in the future! I wanted to learn how to pull data from a public API and become more familiar with JavaScript. I feel I have a much better understanding of asynchronous functions and Promises after doing this project.
@@ -46,3 +56,4 @@ Paste that link into a web browser and copy this portion:
 
 - Thanks to Ritvik Biswas for his <a href = "https://ritvikbiswas.medium.com/connecting-to-the-spotify-api-using-node-js-and-axios-client-credentials-flow-c769e2bee818" target= "_blank">very helpful Medium article</a> on how to perform the client credentials flow to acesss the Spotify API with the axios library
 - <a href = "https://developer.spotify.com/documentation/web-api/" target= "_blank">Spotify's Web API documentation</a>
+</details>
