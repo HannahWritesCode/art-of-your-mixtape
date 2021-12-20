@@ -1,5 +1,5 @@
 //import logo from './logo.svg';
-import './App.css';
+import '../css/App.css';
 import { useState } from "react";
 import PlaylistHeading from './PlaylistHeading'
 import Buttons from './Buttons';

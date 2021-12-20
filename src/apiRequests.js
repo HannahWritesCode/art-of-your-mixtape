@@ -2,7 +2,7 @@
  * This is a node.js module that performs the Client Credentials oAuth2 flow 
  * to access the Spotify Web API. It uses the axios library to make HTTP requests. 
  * 
- * It contains functions that query Spotify's API for a 'track' object, 
+ * It contains functions that query Spotify's API for a 'track' object, a 'playlist' object,
  * an array of 'item' objects in a playlist, and a track's 'audio features'. 
  * 
  * Client credentials obtained from the Spotify Developer platform:
@@ -10,7 +10,7 @@
  *
  */
 
-const axios = require('axios').default; // axios library
+const axios = require('axios').default; 
 const qs = require('qs'); // contains JSON 'stringify' utility
 
 var client_id = process.env.SPOTIFY_CLIENT_ID;
