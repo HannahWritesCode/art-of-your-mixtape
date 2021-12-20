@@ -9,14 +9,14 @@ const PlaylistHeading = () => {
 
   useEffect(()=>{
       axios.get('/express_backend').then((res) => {
-      const data = res.data;
-      setResponse(data)
+      const response = res.data;
+      setResponse(response)
     });
-  })
+  }, [])
 
   return <>
     <h1>Hello from the frontend!</h1>
-    <h1>{response}</h1> 
+    <h1>{JSON.stringify(response)}</h1> 
   </>
 }
 
