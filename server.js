@@ -1,5 +1,5 @@
 /**
- * Node.js Express backend (kind of) 
+ * Node.js Express backend 
  */
 const express = require('express');
 const app = express();
@@ -50,30 +50,12 @@ async function getAccessToken() {
     console.log(error);
   }
 }
-
-/**
- * Send request to Spotify API for a playlist object. 
- * Web API reference: https://developer.spotify.com/documentation/web-api/reference/#/operations/get-playlist
- * @param playlist_id 
- * @returns Promise
- */
-/*
-async function getPlaylist(playlist_id) {
-  // request token using getAccessToken() function
-  const access_token = await getAccessToken();
-  const api_url = `https://api.spotify.com/v1/playlists/${playlist_id}`;
-  try {
-    const response = await axios.get(api_url, {
-      headers: {
-        'Authorization': `Bearer ${access_token}`
-      }
-    });
-    // return Promise of JSON data
-    return response.data;
-  } catch (error) {
-    // on fail, log the error in console
-    console.log(error);
-  }
-}
 */
+
+// serve static build to Heroku 
+app.use(express.static(path.join(__dirname, '/build')));
+app.get('*', (req, res) => { 
+  res.sendFile(path.join(__dirname + '/build/index.html')) 
+});
+
 module.exports = app;
