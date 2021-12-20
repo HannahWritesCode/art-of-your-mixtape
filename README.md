@@ -7,6 +7,7 @@ Coming soon...
 - [x] set up base react.js app (front end)
 - [ ] connect node.js express backend
 - [ ] create /getToken route in backend
+- [ ] share playlistID from App.js to other components (for API calls)
 - [ ] complete PlaylistHeader component
 - [ ] complete SongBreakdown component
 - [ ] design line chart for Analysis component? 
