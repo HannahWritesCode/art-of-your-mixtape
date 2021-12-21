@@ -1,6 +1,7 @@
 /**
  * Node.js Express backend 
  */
+
 const express = require('express');
 const app = express();
 //const cors = require("cors");
@@ -53,9 +54,9 @@ async function getAccessToken() {
 */
 
 // serve static build to Heroku 
-app.use(express.static(path.join(__dirname, 'build'))); 
+app.use(express.static(path.join(__dirname, './build'))); 
 app.get('*', (req, res) => { 
-  res.sendFile(path.join(__dirname + '/build/index.html')) 
+  res.sendFile(path.join(__dirname + './build/index.html')) 
 });
 
 module.exports = app;
