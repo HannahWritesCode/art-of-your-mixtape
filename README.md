@@ -5,17 +5,18 @@ Coming soon...
 ### TODO
 
 - [x] set up base react.js app (front end)
-- [ ] connect node.js express backend
+- [x] connect node.js express backend
 - [ ] create /getToken route in backend
 - [ ] share playlistID from App.js to other components (for API calls)
 - [ ] complete PlaylistHeader component
 - [ ] complete SongBreakdown component
-- [ ] design line chart for Analysis component? 
+- [ ] design line chart for Analysis component?
 - [ ] styling
 
 ## v1 (playlist-analyzer)
 
 A node.js project that pulls data from the Spotify Web API and prints playlist data to the console.
+
 <details>
   
 ## Description

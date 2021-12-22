@@ -15,10 +15,8 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (userInput.startsWith('https://open.spotify.com/playlist/')) {
-      console.log(userInput)
       // isolate and save playlist id from spotify url 
       setPlaylistId(userInput.match(new RegExp('playlist/(.*)\\?si'))[1]);  
-      console.log(playlistId) 
       setUserInput('')
       setErrorMessage('')
       setShowPlaylistHeading(true)

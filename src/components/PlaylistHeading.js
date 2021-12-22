@@ -5,18 +5,17 @@ const axios = require('axios').default;
 
 const PlaylistHeading = () => {
 
-  const [response, setResponse] = useState('')
+  const [accessToken, setAccessToken] = useState('')
 
   useEffect(()=>{
-      axios.get('/express_backend').then((res) => {
-      const response = res.data;
-      setResponse(response)
+      axios.get('/getToken').then((token) => {
+      setAccessToken(token)
     });
   }, [])
 
   return <>
-    <h1>Hello from the frontend!</h1>
-    <h1>{JSON.stringify(response)}</h1> 
+    <h1>Playlist Heading</h1>
+    <h1>Spotify access token: {JSON.stringify(accessToken)}</h1> 
   </>
 }
 
