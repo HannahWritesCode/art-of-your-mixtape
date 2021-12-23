@@ -15,7 +15,7 @@ const PlaylistHeading = () => {
 
   return <>
     <h1>Playlist Heading</h1>
-    <h1>Spotify access token: {JSON.stringify(accessToken)}</h1> 
+    {/* <h1>Spotify access token: {JSON.stringify(accessToken.data)}</h1> */}
   </>
 }
 

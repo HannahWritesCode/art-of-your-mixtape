@@ -7,17 +7,13 @@ const app = express();
 const port = process.env.PORT || 5000;
 const path = require('path');
 
-const axios = require('axios').default; 
+const axios = require('axios').default; // to send HTTP request 
 const qs = require('qs'); // to send authorization data in application/x-www-form-urlencoded format
+require('dotenv').config(); // to use environment variables (spotify credentials) 
 
 var client_id = process.env.SPOTIFY_CLIENT_ID;
 var client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const auth_token = Buffer.from(`${client_id}:${client_secret}`, 'utf-8').toString('base64');
-
-// GET route
-//app.get('/express_backend', (req, res) => {
-  //res.json({message: "Hello from server!"})
-//})
 
 /**
  * GET Spotify API token 
@@ -30,7 +26,7 @@ app.get('/getToken', (req, res) => {
   const response = axios.post(token_url, data, {
     headers: {
       'Authorization': `Basic ${auth_token}`,
-      'Content-Type': 'application/x-www-form-urlencoded' // this doesn't seem to be actually going through, getting a 400 error back and content-type shows as application/json 
+      'Content-Type': 'application/x-www-form-urlencoded' 
     }
   })
   .then(response => {
