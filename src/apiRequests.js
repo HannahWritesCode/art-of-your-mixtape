@@ -12,6 +12,7 @@
 
 const axios = require('axios').default; 
 const qs = require('qs'); // contains JSON 'stringify' utility
+require('dotenv').config(); // to use environment variables (spotify credentials) 
 
 var client_id = process.env.SPOTIFY_CLIENT_ID;
 var client_secret = process.env.SPOTIFY_CLIENT_SECRET;

@@ -16,10 +16,10 @@ var client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const auth_token = Buffer.from(`${client_id}:${client_secret}`, 'utf-8').toString('base64');
 
 /**
- * GET Spotify API token 
+ * GET Spotify API access token 
  * Spotify reference doc: https://developer.spotify.com/documentation/general/guides/authorization/client-credentials/ 
  */ 
-app.get('/getToken', (req, res) => {
+app.get('/getAccessToken', (req, res) => {
   // make post request to SPOTIFY API for access token, sending relevant info
   const token_url = 'https://accounts.spotify.com/api/token';
   const data = qs.stringify({ 'grant_type': 'client_credentials' });
