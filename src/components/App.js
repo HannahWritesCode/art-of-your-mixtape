@@ -1,8 +1,11 @@
 //import logo from './logo.svg';
 import '../css/App.css';
+import logo from '../images/spotify_green_on_black.png';
 import { useState } from "react";
 import PlaylistHeading from './PlaylistHeading'
 import Buttons from './Buttons';
+import {Button, Container, Nav, Navbar, InputGroup, FormControl} from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 
@@ -31,33 +34,39 @@ function App() {
   }
   
   return <>
-    <article>
-      <section>
-        <form onSubmit={handleSubmit}>
-          <input 
+  <Navbar bg="black" variant="dark">
+    <Container >
+      <Navbar.Brand>
+        <img
+          alt="Spotify_Logo"
+          src={logo}
+          width="30"
+          height="30"
+          className="d-inline-block align-top"
+        />
+      Playlist analyzer
+      </Navbar.Brand>
+        <InputGroup className="mb-3" onSubmit={handleSubmit}>
+          <FormControl
+            placeholder="Enter a Spotify playlist link to get started"
+            aria-label="userInput"
+            aria-describedby="basic-addon2"
+            title = "https://open.spotify.com/playlist/..."
+            onChange={(e)=>setUserInput(e.target.value)}
             type = "url" 
             id = 'userInput'
             name = "userInput" 
             value = {userInput}
-            onChange={(e)=>setUserInput(e.target.value)}
-            size = "50" 
-            placeholder = "Enter a Spotify playlist link to get started" 
-            title = "https://open.spotify.com/playlist/..."
-          /> 
-          <button type='submit' onClick={handleSubmit}>Submit</button>
-        </form>
+          />
+          <Button variant="outline-secondary" id="button-addon2" type='submit' onClick={handleSubmit}>Submit</Button>
+        </InputGroup>
+    </Container>
+  </Navbar>
+  <Container>
         {errorMessage && <h4>{errorMessage}</h4>}
-      </section>
-
-      <section>
         {showPlaylistHeading && <PlaylistHeading/>}
-      </section>
-
-      <section>
         {showButtons && <Buttons/>}
-      </section>
-
-    </article>
+  </Container>
   </>
 }
 

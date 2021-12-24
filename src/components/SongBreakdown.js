@@ -1,8 +1,11 @@
-import React from 'react'
+import React from 'react';
+import {Container} from 'react-bootstrap';
 
 const SongBreakdown = () => {
     return <>
-        <h2>song breakdown</h2>
+        <Container>
+            <h2 class="text-center">Song Breakdown</h2>
+        </Container>
     </>
 }
 
