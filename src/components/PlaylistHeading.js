@@ -12,11 +12,9 @@ const PlaylistHeading = () => {
   var playlist_id = '25PK50ilMZN5xk9kdao4vc'; // placeholder, will need to get the one from the App.js form 
   const [playlistName, setPlaylistName] = useState('');
 
-  // this works, but the second GET request returns a 400 error 
-  // before the first one can return the access token 
   useEffect(()=>{
       // GET access token using spotify credentials
-      axios.get('https://art-of-your-mixtape.herokuapp.com/getAccessToken').then(response => {
+      axios.get('https://art-of-your-mixtape.herokuapp.com/api/getAccessToken').then(response => {
         setAccessToken(response.data);
         //console.log(accessToken)
         // GET Spotify Playlist object  
