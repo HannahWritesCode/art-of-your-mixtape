@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import App from './App.js';
+import {playlist_id} from './App.js';
 import {Container, Row, Col} from 'react-bootstrap';
-import playlistCover from '../images/playlist_cover_placeholder.jpg';
 
 const axios = require('axios').default; 
 //let { getAudioFeatures, getPlaylist, getPlaylistItems, getTrack } = require('./apiRequests'); 
@@ -9,29 +9,37 @@ const axios = require('axios').default;
 const PlaylistHeading = () => {
 
   const [accessToken, setAccessToken] = useState('');
-  var playlist_id = '25PK50ilMZN5xk9kdao4vc'; // placeholder, will need to get the one from the App.js form 
   const [playlistName, setPlaylistName] = useState('');
+  const [playlistCoverUrl, setPlaylistCover] = useState('');
 
+  // There is an error were after submitting the effect will infinitely call the api
+  //error 400 
   useEffect(()=>{
       // GET access token using spotify credentials
-      axios.get('/getAccessToken').then(response => {
+      axios.get('/getAccessToken')
+      .then(response => {
         setAccessToken(response.data);
-        //console.log(accessToken)
-        // GET Spotify Playlist object  
-        axios.get(`https://api.spotify.com/v1/playlists/${playlist_id}`,{
-          headers:{
-            'Authorization': `Bearer ${accessToken}`
-          }
-        })
-        .then (response => {
-          setPlaylistName(response.data.name);
-        })
-        .catch (error => {
-          console.log(error);
-        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }, [accessToken]);
 
-      });
-  }, [accessToken, playlist_id])
+  useEffect(()=>{
+      // GET Spotify Playlist object 
+      console.log(accessToken) 
+      const playlistName = axios.get(`https://api.spotify.com/v1/playlists/${playlist_id}`,{ headers:{'Authorization': `Bearer ${accessToken}`}});
+      const playlistCover = axios.get(`https://api.spotify.com/v1/playlists/${playlist_id}/images`,{ headers:{'Authorization': `Bearer ${accessToken}`}});
+      axios.all([playlistName, playlistCover])
+      .then (axios.spread((...responses) => {
+        setPlaylistName(responses[0].data.name)
+        setPlaylistCover(responses[1].data[0].url)
+      }))
+      .catch (error => {
+        console.log(error);
+      })
+
+}, [accessToken, playlistName,playlistCoverUrl]);
 
   return <>
     <Container>
@@ -39,7 +47,7 @@ const PlaylistHeading = () => {
         <Col>
           <img
             alt="playlist_cover"
-            src={playlistCover}
+            src={playlistCoverUrl}
             width="300"
             height="300"
             className='img-fluid shadow-2-strong'
