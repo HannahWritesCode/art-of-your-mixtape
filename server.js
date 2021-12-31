@@ -15,6 +15,19 @@ var client_id = process.env.SPOTIFY_CLIENT_ID;
 var client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 const auth_token = Buffer.from(`${client_id}:${client_secret}`, 'utf-8').toString('base64');
 
+// Access Control Allow Origin headers
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin", "https://art-of-your-mixtape.herokuapp.com/",
+    "Access-Control-Allow-Origin", "localhost:3000" 
+    );
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 /**
  * GET Spotify API access token 
  * Spotify reference doc: https://developer.spotify.com/documentation/general/guides/authorization/client-credentials/ 

@@ -14,7 +14,7 @@ const PlaylistHeading = () => {
 
   useEffect(()=>{
       // GET access token using spotify credentials
-      axios.get('https://art-of-your-mixtape.herokuapp.com/getAccessToken').then(response => {
+      axios.get('/getAccessToken').then(response => {
         setAccessToken(response.data);
         //console.log(accessToken)
         // GET Spotify Playlist object  
