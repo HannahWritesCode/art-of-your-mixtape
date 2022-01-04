@@ -9,7 +9,7 @@ const path = require('path');
 
 const axios = require('axios').default; // to send HTTP request 
 const qs = require('qs'); // to send authorization data in application/x-www-form-urlencoded format
-require('dotenv').config(); // to use environment variables (spotify credentials) 
+if (process.env.NODE_ENV !== 'production') { require('dotenv').config(); } // to use environment variables in local development  
 
 var client_id = process.env.SPOTIFY_CLIENT_ID;
 var client_secret = process.env.SPOTIFY_CLIENT_SECRET;
