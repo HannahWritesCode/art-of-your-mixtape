@@ -33,7 +33,6 @@ app.use((req, res, next) => {
  * Spotify reference doc: https://developer.spotify.com/documentation/general/guides/authorization/client-credentials/ 
  */ 
 app.get('/getAccessToken', (req, res) => {
-  console.log('backend called')
   // make post request to SPOTIFY API for access token, sending relevant info
   const token_url = 'https://accounts.spotify.com/api/token';
   const data = qs.stringify({ 'grant_type': 'client_credentials' });
@@ -46,7 +45,6 @@ app.get('/getAccessToken', (req, res) => {
   .then(response => {
     // send access token back to client 
     res.send(response.data.access_token)
-    res.send('response sent to client')
   })
   .catch(error => {
     //res.send(error)
