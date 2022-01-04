@@ -36,7 +36,7 @@ app.get('/getAccessToken', (req, res) => {
   // make post request to SPOTIFY API for access token, sending relevant info
   const token_url = 'https://accounts.spotify.com/api/token';
   const data = qs.stringify({ 'grant_type': 'client_credentials' });
-  const response = axios.post(token_url, data, {
+  axios.post(token_url, data, {
     headers: {
       'Authorization': `Basic ${auth_token}`,
       'Content-Type': 'application/x-www-form-urlencoded' 
