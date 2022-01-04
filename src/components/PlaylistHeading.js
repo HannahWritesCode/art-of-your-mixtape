@@ -29,12 +29,12 @@ const PlaylistHeading = () => {
   const [playlistDuration, setPlaylistDuration] = useState('');
   const [playlistLikes, setPlaylistLikes] = useState('');
 
-  // There is an error were after submitting the effect will infinitely call the api
-  //error 400 
   useEffect(()=>{
+      console.log('get access token')
       // GET access token using spotify credentials
       axios.get('/getAccessToken')
       .then(response => {
+        console.log(response.data)
         setAccessToken(response.data);
       })
       .catch(error => {
@@ -43,6 +43,7 @@ const PlaylistHeading = () => {
   }, []);
 
   useEffect(()=>{
+      console.log('get playlist data')
       // GET Spotify Playlist object 
       const playlistName = axios.get(`https://api.spotify.com/v1/playlists/${playlist_id}`,{ headers:{'Authorization': `Bearer ${accessToken}`}});
       const playlistCover = axios.get(`https://api.spotify.com/v1/playlists/${playlist_id}/images`,{ headers:{'Authorization': `Bearer ${accessToken}`}});

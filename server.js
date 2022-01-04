@@ -47,6 +47,7 @@ app.get('/getAccessToken', (req, res) => {
     res.send(response.data.access_token)
   })
   .catch(error => {
+    res.send(error)
     console.log(error)
   })
 })
@@ -56,10 +57,8 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // serve static build to Heroku 
 app.use(express.static(path.join(__dirname, './build'))); 
-if(process.env.NODE_ENV === 'production'){
-  app.get('/*', (req, res) => { 
-    res.sendFile(path.join(__dirname + './build/index.html')) 
-  });
-}
+app.get('/*', (req, res) => { 
+  res.sendFile(path.join(__dirname + './build/index.html')) 
+});
 
 module.exports = app;
