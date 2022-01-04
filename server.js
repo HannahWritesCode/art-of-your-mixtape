@@ -45,8 +45,8 @@ app.get('/getAccessToken', (req, res) => {
   })
   .then(response => {
     // send access token back to client 
-    console.log('response sent to client')
     res.send(response.data.access_token)
+    res.send('response sent to client')
   })
   .catch(error => {
     //res.send(error)
