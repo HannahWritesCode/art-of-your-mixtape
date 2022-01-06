@@ -49,7 +49,7 @@ function App() {
         />
       Playlist analyzer
       </Navbar.Brand>
-        <InputGroup className="mb-3" onSubmit={handleSubmit}>
+        <InputGroup className="mt-3 mb-3" onSubmit={handleSubmit}>
           <FormControl
             placeholder="Enter a Spotify playlist link to get started"
             aria-label="userInput"
