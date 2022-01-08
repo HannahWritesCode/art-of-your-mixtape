@@ -9,7 +9,7 @@ const path = require('path');
 
 const axios = require('axios').default; // to send HTTP request 
 const qs = require('qs'); // to send authorization data in application/x-www-form-urlencoded format
-if (process.env.NODE_ENV !== 'production') { require('dotenv').config(); } // to use environment variables in local development  
+require('dotenv').config(); // to use environment variables in local development 
 
 var client_id = process.env.SPOTIFY_CLIENT_ID;
 var client_secret = process.env.SPOTIFY_CLIENT_SECRET;
@@ -47,8 +47,8 @@ app.get('/getAccessToken', (req, res) => {
     res.send(response.data.access_token)
   })
   .catch(error => {
-    //res.send(error)
-    console.log(error)
+    res.send(error)
+    //console.log(error)
   })
 })
 
@@ -56,10 +56,10 @@ app.get('/getAccessToken', (req, res) => {
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // serve static build to Heroku 
-app.use(express.static(path.join(__dirname, './build'))); 
 if (process.env.NODE_ENV == 'production') {
+  app.use(express.static(path.join(__dirname, './build'))); 
   app.get('*', (req, res) => { 
-    res.sendFile(path.join(__dirname + './build')) 
+    res.sendFile(path.join(__dirname + './build/index.html')) 
   });
 }
 

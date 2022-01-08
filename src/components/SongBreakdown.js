@@ -23,18 +23,17 @@ const SongBreakdown = () => {
     }, []);
   
     useEffect(()=>{
-
         if(accessToken){
             // GET Spotify Playlist object 
             const playlistTracks = axios.get(`https://api.spotify.com/v1/playlists/${playlist_id}/tracks`,{ headers:{'Authorization': `Bearer ${accessToken}`}});
-    
+            
             axios.all([playlistTracks])
             .then (axios.spread((...responses) => {
-            setPlaylistTrack(responses[0].data.items[0]);
-            setPlaylistCover(responses[0].data.items[0].track.album.images[0].url);
+                setPlaylistTrack(responses[0].data.items[0]);
+                setPlaylistCover(responses[0].data.items[0].track.album.images[0].url);
             }))
             .catch (error => {
-            console.log(error);
+                console.log(error);
             })
         }
     }, [accessToken, playlist_id]);
