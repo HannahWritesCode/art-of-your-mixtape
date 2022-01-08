@@ -6,7 +6,6 @@ import Buttons from './Buttons';
 import {Button, Container, Navbar, InputGroup, FormControl} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-//Im not sure why but the react hook for playlistid just stores a empty string when trying to isolate the url 
 var playlist_id = '';
 
 function App() {

@@ -33,7 +33,7 @@ const PlaylistHeading = () => {
       // GET access token using spotify credentials
       axios.get('/getAccessToken')
       .then(response => {
-        console.log(response.data)
+        //console.log(response.data)
         setAccessToken(response.data);
       })
       .catch(error => {
@@ -42,8 +42,6 @@ const PlaylistHeading = () => {
   }, []);
 
   useEffect(()=>{
-
-    // If statment makes sure access token is not empty unsure if this is the right chose, but it seem to work to bypass the 400 error
     if(accessToken){
       // GET Spotify Playlist object 
       const playlistName = axios.get(`https://api.spotify.com/v1/playlists/${playlist_id}`,{ headers:{'Authorization': `Bearer ${accessToken}`}});

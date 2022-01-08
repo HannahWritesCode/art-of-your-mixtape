@@ -57,8 +57,10 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 
 // serve static build to Heroku 
 app.use(express.static(path.join(__dirname, './build'))); 
-app.get('*', (req, res) => { 
-  res.sendFile(path.join(__dirname + './build')) 
-});
+if (process.env.NODE_ENV == 'production') {
+  app.get('*', (req, res) => { 
+    res.sendFile(path.join(__dirname + './build')) 
+  });
+}
 
 module.exports = app;
