@@ -42,7 +42,7 @@ const PlaylistHeading = () => {
   }, []);
 
   useEffect(()=>{
-    if(!accessToken.isEmpty()){
+    if(accessToken){
       // GET Spotify Playlist object 
       const playlistName = axios.get(`https://api.spotify.com/v1/playlists/${playlist_id}`,{ headers:{'Authorization': `Bearer ${accessToken}`}});
       const playlistCover = axios.get(`https://api.spotify.com/v1/playlists/${playlist_id}/images`,{ headers:{'Authorization': `Bearer ${accessToken}`}});
