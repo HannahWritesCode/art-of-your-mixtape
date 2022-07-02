@@ -1,42 +1,28 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import {Container, Row, Col} from 'react-bootstrap';
-import {playlist_id} from './App.js';
+import { Container, Row, Col } from 'react-bootstrap';
+import { playlist_id } from './App.js';
 
 const axios = require('axios').default;
 
 const SongBreakdown = () => {
 
     const [playlistTracks, setPlaylistTrack] = useState('');
-    const [accessToken, setAccessToken] = useState('');
     const [playlistCoverUrl, setPlaylistCover] = useState('');
 
-    useEffect(()=>{
-        // GET access token using spotify credentials
-        axios.get('/getAccessToken')
-        .then(response => {
-          setAccessToken(response.data);
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    }, []);
-  
-    useEffect(()=>{
-        if(accessToken){
-            // GET Spotify Playlist object 
-            const playlistTracks = axios.get(`https://api.spotify.com/v1/playlists/${playlist_id}/tracks`,{ headers:{'Authorization': `Bearer ${accessToken}`}});
-            
-            axios.all([playlistTracks])
-            .then (axios.spread((...responses) => {
+    useEffect(() => {
+
+        const playlistTracks = axios.get(`/playlist/${playlist_id}/tracks`);
+
+        axios.all([playlistTracks])
+            .then(axios.spread((...responses) => {
                 setPlaylistTrack(responses[0].data.items[0]);
                 setPlaylistCover(responses[0].data.items[0].track.album.images[0].url);
             }))
-            .catch (error => {
+            .catch(error => {
                 console.log(error);
             })
-        }
-    }, [accessToken, playlist_id]);
+    }, [playlist_id]);
 
     return <>
         <h2 className="text-center">Song Breakdown</h2>
