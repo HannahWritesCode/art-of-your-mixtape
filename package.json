@@ -9,7 +9,7 @@
     "server": "node server/server.js",
     "dev": "concurrently \"npm run client\" \"npm run server\"",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm install && cd client && npm install && npm run build && cp -r build/ public/"
+    "heroku-postbuild": "npm install && cd client && npm install && npm run build && cp -r build/ ../server"
   },
   "keywords": [],
   "author": "",
