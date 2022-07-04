@@ -37,7 +37,7 @@ const PlaylistHeading = () => {
         // errors to handle: 
         // 404 when playlist is not found / is private 
 
-        axios.all([playlistName, playlistCover, playlistTracks])
+        axios.all([playlistName/*, playlistCover, playlistTracks*/])
             .then(axios.spread((...responses) => {
                 console.log('response received from spotify api')
                 setPlaylistName(responses[0].data.name);
