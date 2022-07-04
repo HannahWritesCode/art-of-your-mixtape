@@ -6,7 +6,6 @@ const express = require('express');
 const routes = express.Router();
 const axios = require('axios');
 const getAccessToken = require('./getAccessToken');
-const { send } = require('process');
 
 /**
  * GET playlist object 
@@ -14,7 +13,7 @@ const { send } = require('process');
  */
 routes.route('/playlist/:id')
     .get(async function (req, res) {
-        const access_token = await getAccessToken();
+        const access_token = await getAccessToken()
         const api_url = `https://api.spotify.com/v1/playlists/${req.params.id}`;
 
         // make GET request to SPOTIFY API, sending access token 
@@ -27,8 +26,9 @@ routes.route('/playlist/:id')
                 res.send(response.data)
             })
             .catch(error => {
+                console.log("Error retrieving playlist object")
+                console.log(error);
                 res.send(error);
-                //console.log(error);
             })
     })
 

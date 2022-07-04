@@ -12,16 +12,16 @@ const SongBreakdown = () => {
 
     useEffect(() => {
 
-        const playlistTracks = axios.get(`/playlist/${playlist_id}/tracks`);
+        // const playlistTracks = axios.get(`/playlist/${playlist_id}/tracks`);
 
-        axios.all([playlistTracks])
-            .then(axios.spread((...responses) => {
-                setPlaylistTrack(responses[0].data.items[0]);
-                setPlaylistCover(responses[0].data.items[0].track.album.images[0].url);
-            }))
-            .catch(error => {
-                console.log(error);
-            })
+        // axios.all([playlistTracks])
+        //     .then(axios.spread((...responses) => {
+        //         setPlaylistTrack(responses[0].data.items[0]);
+        //         setPlaylistCover(responses[0].data.items[0].track.album.images[0].url);
+        //     }))
+        //     .catch(error => {
+        //         console.log(error);
+        //     })
     }, [playlist_id]);
 
     return <>

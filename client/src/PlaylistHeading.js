@@ -30,9 +30,9 @@ const PlaylistHeading = () => {
     useEffect(() => {
 
         const playlistName = axios.get(`/playlist/${playlist_id}`);
-        const playlistCover = axios.get(`/playlist/${playlist_id}/images`)
-        const playlistTracks = axios.get(`/playlist/${playlist_id}/tracks`)
-        console.log(playlistCover);
+        //const playlistCover = axios.get(`/playlist/${playlist_id}/images`)
+        //const playlistTracks = axios.get(`/playlist/${playlist_id}/tracks`)
+        console.log(playlistName);
 
         // errors to handle: 
         // 404 when playlist is not found / is private 
@@ -41,12 +41,12 @@ const PlaylistHeading = () => {
             .then(axios.spread((...responses) => {
                 console.log('response received from spotify api')
                 setPlaylistName(responses[0].data.name);
-                setPlaylistLikes(responses[0].data.followers.total);
-                setPlaylistDescription(responses[0].data.description);
-                setPlaylistOwner(responses[0].data.owner.display_name);
-                setPlaylistCover(responses[1].data[0].url);
-                setPlaylistNumSongs(responses[2].data.total);
-                setPlaylistDuration(msToHours(responses[2].data.items));
+                //setPlaylistLikes(responses[0].data.followers.total);
+                //setPlaylistDescription(responses[0].data.description);
+                //setPlaylistOwner(responses[0].data.owner.display_name);
+                //setPlaylistCover(responses[1].data[0].url);
+                //setPlaylistNumSongs(responses[2].data.total);
+                //setPlaylistDuration(msToHours(responses[2].data.items));
             }))
             .catch(error => {
                 console.log(error);
