@@ -5,7 +5,8 @@ const path = require('path');
 const express = require('express');
 const routes = express.Router();
 const axios = require('axios');
-const getAccessToken = require('./getAccessToken')
+const getAccessToken = require('./getAccessToken');
+const { send } = require('process');
 
 /**
  * GET playlist object 
@@ -26,7 +27,8 @@ routes.route('/playlist/:id')
                 res.send(response.data)
             })
             .catch(error => {
-                console.log(error);
+                res.send(error);
+                //console.log(error);
             })
     })
 
@@ -49,7 +51,8 @@ routes.route('/playlist/:id/images')
                 res.send(response.data)
             })
             .catch(error => {
-                console.log(error);
+                res.send(error);
+                //console.log(error);
             })
     })
 
@@ -72,7 +75,8 @@ routes.route('/playlist/:id/tracks')
                 res.send(response.data)
             })
             .catch(error => {
-                console.log(error);
+                res.send(error);
+                //console.log(error);
             })
     })
 
@@ -95,7 +99,8 @@ routes.route('/track/:id')
                 res.send(response.data)
             })
             .catch(error => {
-                console.log(error);
+                res.send(error);
+                //console.log(error);
             })
     })
 
@@ -118,7 +123,8 @@ routes.route('/track/:id/audio-features')
                 res.send(response.data)
             })
             .catch(error => {
-                console.log(error);
+                res.send(error);
+                //console.log(error);
             })
     })
 

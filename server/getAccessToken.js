@@ -32,7 +32,8 @@ async function getAccessToken() {
 
     } catch (error) {
         //on fail, log the error in console
-        console.log(error);
+        //console.log(error);
+        return error;
     }
 }
 
