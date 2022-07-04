@@ -128,7 +128,7 @@ routes.route('/track/:id/audio-features')
 if (process.env.NODE_ENV === 'production') {
     routes.route('/*')
         .get(function (req, res) {
-            res.sendFile(path.resolve(__dirname, '../client/build'));
+            res.sendFile(path.resolve(__dirname, '../client/public/build'));
         })
 }
 
