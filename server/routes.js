@@ -26,7 +26,7 @@ routes.route('/playlist/:id')
                 res.send(response.data)
             })
             .catch(error => {
-                console.log("Error retrieving playlist object")
+                console.log("Error retrieving playlist object");
                 console.log(error);
                 res.send(error);
             })
@@ -51,8 +51,9 @@ routes.route('/playlist/:id/images')
                 res.send(response.data)
             })
             .catch(error => {
+                console.log("Error retrieving playlist images");
+                console.log(error);
                 res.send(error);
-                //console.log(error);
             })
     })
 
@@ -75,8 +76,9 @@ routes.route('/playlist/:id/tracks')
                 res.send(response.data)
             })
             .catch(error => {
+                console.log("Error retrieving playlist tracks");
+                console.log(error);
                 res.send(error);
-                //console.log(error);
             })
     })
 
@@ -99,8 +101,9 @@ routes.route('/track/:id')
                 res.send(response.data)
             })
             .catch(error => {
+                console.log("Error retrieving track object");
+                console.log(error);
                 res.send(error);
-                //console.log(error);
             })
     })
 
@@ -123,8 +126,9 @@ routes.route('/track/:id/audio-features')
                 res.send(response.data)
             })
             .catch(error => {
+                console.log("Error retrieving track audio features");
+                console.log(error);
                 res.send(error);
-                //console.log(error);
             })
     })
 
@@ -134,7 +138,7 @@ routes.route('/track/:id/audio-features')
 if (process.env.NODE_ENV === 'production') {
     routes.route('/*')
         .get(function (req, res) {
-            res.sendFile(path.resolve(__dirname, './build'));
+            res.sendFile(path.resolve(__dirname, '../client/build'));
         })
 }
 

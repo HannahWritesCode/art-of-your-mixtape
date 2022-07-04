@@ -8,8 +8,7 @@
     "client": "cd client && npm start",
     "server": "node server/server.js",
     "dev": "concurrently \"npm run client\" \"npm run server\"",
-    "build": "cd client && npm run build",
-    "heroku-postbuild": "npm install && cd client && npm install && npm run build && cp -r build/ ../server"
+    "build": "cd client && npm run build"
   },
   "keywords": [],
   "author": "",
