@@ -1,21 +1,9 @@
 import { useState, useEffect } from 'react';
 import { playlist_id } from './App.js';
 import { Container, Row, Col } from 'react-bootstrap';
+import { msToHours } from './components/TimeConverter.js';
 
 const axios = require('axios').default;
-
-const msToHours = (track) => {
-
-    var time = 0;
-    track.forEach(element => {
-        time += element.track.duration_ms;
-    });
-
-    var hours = Math.floor((time / (1000 * 60 * 60)) % 24);
-    var minutes = Math.floor((time / (1000 * 60)) % 60);
-
-    return hours + " hr " + minutes + " min"
-}
 
 const PlaylistHeading = () => {
 
@@ -38,7 +26,6 @@ const PlaylistHeading = () => {
 
         axios.all([playlistName, playlistCover, playlistTracks])
             .then(axios.spread((...responses) => {
-                console.log('response received from spotify api')
                 setPlaylistName(responses[0].data.name);
                 setPlaylistLikes(responses[0].data.followers.total);
                 setPlaylistDescription(responses[0].data.description);
