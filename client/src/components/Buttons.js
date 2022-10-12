@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import SongBreakdown from './SongBreakdown';
-import Analysis from './Analysis';
+import SongBreakdown from '../SongBreakdown';
+import Analysis from '../Analysis';
 import { Button, Stack, Container } from 'react-bootstrap';
 
 const Buttons = () => {

@@ -1,8 +1,8 @@
-import logo from '../src/spotify_green_on_black.png';
+import logo from './images/spotify_green_on_black.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from "react";
 import PlaylistHeading from './PlaylistHeading';
-import Buttons from './Buttons';
+import Buttons from './components/Buttons';
 import { Button, Container, Navbar, InputGroup, FormControl } from 'react-bootstrap';
 
 var playlist_id = '';
@@ -65,8 +65,7 @@ function App() {
     </Navbar>
     <Container>
       {errorMessage && <h4>{errorMessage}</h4>}
-      {showPlaylistHeading && <PlaylistHeading />}
-      {showButtons && <Buttons />}
+      {showPlaylistHeading && <PlaylistHeading id={playlist_id}/>}
     </Container>
   </>
 }

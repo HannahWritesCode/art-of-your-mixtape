@@ -2,37 +2,37 @@ import { useState, useEffect } from 'react';
 import { playlist_id } from './App.js';
 import { Container, Row, Col } from 'react-bootstrap';
 import { msToHours } from './components/TimeConverter.js';
+import Buttons from './components/Buttons';
+import Spinner from "react-bootstrap/Spinner";
 
 const axios = require('axios').default;
 
 const PlaylistHeading = () => {
 
-    const [playlistName, setPlaylistName] = useState('');
-    const [playlistCoverUrl, setPlaylistCover] = useState('');
-    const [playlistDescription, setPlaylistDescription] = useState('');
-    const [playlistOwner, setPlaylistOwner] = useState('');
-    const [playlistNumSongs, setPlaylistNumSongs] = useState('');
-    const [playlistDuration, setPlaylistDuration] = useState('');
-    const [playlistLikes, setPlaylistLikes] = useState('');
+    const [playlistInfo, setPlaylistInfo] = useState({});
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
 
         const playlistName = axios.get(`/playlist/${playlist_id}`);
         const playlistCover = axios.get(`/playlist/${playlist_id}/images`)
         const playlistTracks = axios.get(`/playlist/${playlist_id}/tracks`)
-
+        setLoading(true);
         // errors to handle: 
         // 404 when playlist is not found / is private 
-
         axios.all([playlistName, playlistCover, playlistTracks])
             .then(axios.spread((...responses) => {
-                setPlaylistName(responses[0].data.name);
-                setPlaylistLikes(responses[0].data.followers.total);
-                setPlaylistDescription(responses[0].data.description);
-                setPlaylistOwner(responses[0].data.owner.display_name);
-                setPlaylistCover(responses[1].data[0].url);
-                setPlaylistNumSongs(responses[2].data.total);
-                setPlaylistDuration(msToHours(responses[2].data.items));
+                let playlist = {
+                    name: responses[0].data.name,
+                    coverUrl: responses[1].data[0].url,
+                    description: responses[0].data.description,
+                    owner: responses[0].data.owner.display_name,
+                    numberOfSongs: responses[2].data.total,
+                    duration: msToHours(responses[2].data.items),
+                    likes: responses[0].data.followers.total
+                }
+                setPlaylistInfo(playlist);
+                setLoading(false);
             }))
             .catch(error => {
                 console.log(error);
@@ -41,23 +41,35 @@ const PlaylistHeading = () => {
 
     return <>
         <Container className="justify-content-md-center mt-5 mb-5">
-            <Row className='text-center'>
-                <Col>
-                    <img
-                        alt="playlist_cover"
-                        src={playlistCoverUrl}
-                        width="300"
-                        height="300"
-                        className='img-fluid shadow-2-strong'
-                    />
-                </Col>
-                <Col className='pt-5'>
-                    <h1>{playlistName}</h1>
-                    <p>{playlistDescription}</p>
-                    <p>{playlistOwner} &bull; {playlistLikes} likes &bull; {playlistNumSongs} Songs, {playlistDuration}</p>
-                </Col>
-            </Row>
+            {loading ? (
+                <Container className="text-center">
+                    <Spinner animation="border" variant="dark"/>
+                </Container>
+            ):(
+                    <Container className='playlist'>
+                        <Row className='text-center'>
+                            <Col>
+                                <img
+                                    alt="playlist_cover"
+                                    src={playlistInfo.coverUrl}
+                                    width="300"
+                                    height="300"
+                                    className='img-fluid shadow-2-strong'
+                                />
+                            </Col>
+                            <Col className='pt-5'>
+                                <h1>{playlistInfo.name}</h1>
+                                <p>{playlistInfo.description}</p>
+                                <p>{playlistInfo.owner} &bull; {playlistInfo.likes} likes &bull; {playlistInfo.numberOfSongs} Songs, {playlistInfo.duration}</p>
+                            </Col>
+                        </Row>
+                        <Container className='justify-content-md-center mt-5 mb-5'>
+                            <Buttons/>
+                        </Container>
+                </Container>
+            )}
         </Container>
+
     </>
 }
 
