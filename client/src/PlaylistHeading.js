@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { playlist_id } from './App.js';
 import { Container, Row, Col } from 'react-bootstrap';
-import { msToHours } from './components/TimeConverter.js';
+import { msToHours } from './components/UnitConverter';
 import Buttons from './components/Buttons';
 import Spinner from "react-bootstrap/Spinner";
 

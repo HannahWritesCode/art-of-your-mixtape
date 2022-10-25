@@ -32,15 +32,12 @@ const SongBreakdown = () => {
         getSongs();
     }, [playlist_id]);
     
-    // TODO: fix design of carousel, add lettering to keys and mode, convert duration from ms to minutes, choose style of displaying track info
     return (
         <Container className='justify-content-md-center mt-5 mb-5'>
             <div className='SongCarousel'>
                 <h2 className="text-center">Song Breakdown</h2>
-                {loading ? (
-                    <Container className='text-center'> 
-                        <Spinner animation="border" variant="dark"/>
-                    </Container>
+                {loading ? ( 
+                    <Spinner className='text-center' animation="border" variant="dark"/>
                 ) : (
                     <SongsList albumSongs = {albumSongs}/>
                 )}
