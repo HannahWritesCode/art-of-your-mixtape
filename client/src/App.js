@@ -19,6 +19,7 @@ function App() {
         // isolate and save playlist id from spotify url 
         //setPlaylistId(userInput.match(new RegExp('playlist/(.*)\\?si'))[1])
         playlist_id = userInput.match(new RegExp('playlist/(.*)\\?si'))[1];
+        window.sessionStorage.removeItem("playlist");
         setUserInput('');
         setErrorMessage('');
         setShowPlaylistHeading(true);

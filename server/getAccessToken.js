@@ -32,7 +32,8 @@ async function getAccessToken() {
 
     } catch (error) {
         console.log("Error retrieving access token");
-        console.log(error);
+        console.log("code: " + error.code);
+        console.log("response: " + error.response.status + ": " + error.response.statusText + "\n");
         return error;
     }
 }
