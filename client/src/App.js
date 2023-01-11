@@ -1,8 +1,8 @@
 import logo from './images/spotify_green_on_black.png';
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState } from "react";
 import PlaylistHeading from './PlaylistHeading';
-import Buttons from './components/Buttons';
+//import Buttons from './components/Buttons';
 import { Button, Container, Navbar, InputGroup, FormControl } from 'react-bootstrap';
 
 var playlist_id = '';
@@ -13,7 +13,7 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('');
   //const [playlistId, setPlaylistId] = useState('') 
   const [showPlaylistHeading, setShowPlaylistHeading] = useState(false);
-  const [showButtons, setShowButtons] = useState(false);
+  //const [showButtons, setShowButtons] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -24,7 +24,7 @@ function App() {
       setUserInput('');
       setErrorMessage('');
       setShowPlaylistHeading(true);
-      setShowButtons(true);
+      //setShowButtons(true);
     } else if (userInput === '') {
       console.log('empty form submitted');
       setErrorMessage('You gotta put something in the box, silly');
@@ -65,7 +65,7 @@ function App() {
     </Navbar>
     <Container>
       {errorMessage && <h4>{errorMessage}</h4>}
-      {showPlaylistHeading && <PlaylistHeading id={playlist_id}/>}
+      {showPlaylistHeading && <PlaylistHeading id={playlist_id} />}
     </Container>
   </>
 }
