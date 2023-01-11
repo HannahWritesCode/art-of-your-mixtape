@@ -1,8 +1,9 @@
 import logo from './images/spotify_green_on_black.png';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './CSS/App.css'
 import { useState } from "react";
-import PlaylistHeading from './PlaylistHeading';
-import { Button, Container, Navbar, InputGroup, FormControl } from 'react-bootstrap';
+import { PlaylistHeading } from './PlaylistHeading';
+import { Nav, NavDropdown, Button, Container, Navbar, Form } from 'react-bootstrap';
 
 var playlist_id = '';
 
@@ -34,8 +35,8 @@ function App() {
 
   return(
     <>
-      <Navbar bg="black" variant="dark">
-        <Container >
+      <Navbar collapseOnSelect expand="md" bg="black" variant="dark">
+        <Container fluid>
           <Navbar.Brand>
             <img
               alt="Spotify_Logo"
@@ -44,11 +45,23 @@ function App() {
               height="30"
               className="d-inline-block align-top"
             />
-            Playlist analyzer
+            Playlist Analyzer
           </Navbar.Brand>
-          <InputGroup className="mt-3 mb-3" onSubmit={handleSubmit}>
-            <FormControl
-              placeholder="Enter a Spotify playlist link to get started"
+          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Collapse className="mt-2 mb-2" id="navbarScroll">
+          <Nav
+            className="me-auto my-2 my-lg-0"
+            style={{ maxHeight: '100px' }}
+            navbarScroll
+          >
+            <Nav.Link href="#action1">Home</Nav.Link>
+            <Nav.Link href="#action2">About</Nav.Link>
+          </Nav>
+          <Form className="d-flex mt-3 mb-3" onSubmit={handleSubmit}>
+            <Form.Control
+              className="me-2"
+              size="lg"
+              placeholder="Analyze Playlist"
               aria-label="userInput"
               aria-describedby="basic-addon2"
               title="https://open.spotify.com/playlist/..."
@@ -58,8 +71,9 @@ function App() {
               name="userInput"
               value={userInput}
             />
-            <Button variant="outline-secondary" id="button-addon2" type='submit' onClick={handleSubmit}>Submit</Button>
-          </InputGroup>
+            <Button variant="outline-secondary" type='submit' onClick={handleSubmit}>Search</Button>
+          </Form>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
       <Container>

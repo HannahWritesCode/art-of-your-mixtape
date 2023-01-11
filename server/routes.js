@@ -62,12 +62,12 @@ routes.route('/playlist/:id/images')
 /**
  * GET playlist tracks
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-playlists-tracks
+ * ?market=ES&limit=3&offset=3
  */
-routes.route('/playlist/:id/tracks')
+routes.route('/playlist/:id/tracks/:offset?')
     .get(async function (req, res) {
         const access_token = await getAccessToken();
-        const api_url = `https://api.spotify.com/v1/playlists/${req.params.id}/tracks`;
-
+        const api_url = `https://api.spotify.com/v1/playlists/${req.params.id}/tracks?limit=100&offset=${req.params.offset}`;
         // make GET request to SPOTIFY API, sending access token 
         await axios.get(api_url, {
             headers: {

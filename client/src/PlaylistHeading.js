@@ -6,6 +6,7 @@ import Buttons from './components/Buttons';
 import Spinner from "react-bootstrap/Spinner";
 
 const axios = require('axios').default;
+let playlistLength = 0;
 
 const PlaylistHeading = () => {
 
@@ -16,7 +17,8 @@ const PlaylistHeading = () => {
 
         const playlistName = axios.get(`/playlist/${playlist_id}`);
         const playlistCover = axios.get(`/playlist/${playlist_id}/images`)
-        const playlistTracks = axios.get(`/playlist/${playlist_id}/tracks`)
+        const playlistTracks = axios.get(`/playlist/${playlist_id}/tracks/${0}`)
+
         setLoading(true);
         // errors to handle: 
         // 404 when playlist is not found / is private 
@@ -32,6 +34,7 @@ const PlaylistHeading = () => {
                     likes: responses[0].data.followers.total
                 }
                 setPlaylistInfo(playlist);
+                playlistLength = playlist.numberOfSongs;
                 setLoading(false);
             }))
             .catch(error => {
@@ -73,4 +76,4 @@ const PlaylistHeading = () => {
     </>
 }
 
-export default PlaylistHeading;
+export {PlaylistHeading, playlistLength};

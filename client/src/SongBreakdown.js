@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { playlist_id } from './App.js';
 import { SongsList } from './components/Album';
+import { playlistLength } from './PlaylistHeading';
+import GetTrackItems from './components/GetTracks.js';
 import Spinner from 'react-bootstrap/Spinner';
 
 const axios = require('axios').default;
@@ -14,34 +16,20 @@ const SongBreakdown = () => {
     const [loading, setLoading] = useState(true);
     const sessionStorage = window.sessionStorage.getItem("playlist");
 
-    const getSongs = async() => {
-        setLoading(true);
-        axios.get(`/playlist/${playlist_id}/tracks`)
-            .then(async (res) => {         
-                if(res.data.items !== undefined){
-                    const res2 = await Promise.all(res.data.items.filter((val) => {
-                        if(val.track === undefined || val.track.id == null) return false;
-                        return true;
-                    }).map(async(val) => {
-                        let audio = await axios.get(`/track/${val.track.id}/audio-features`);
-                        val["audio_stats"] = audio.data;
-                        return val;
-                    }));
-                    setAlbumSongs(res2);
-                    window.sessionStorage.setItem("playlist", JSON.stringify(res2));
-                    setLoading(false);
-                };
-            });
-    };
+    const getTrackInfo = async() => {
+        const songs = await GetTrackItems(playlist_id, 0, Math.ceil(playlistLength/100));
+        setLoading(false);
+        window.sessionStorage.setItem("playlist", JSON.stringify(songs));
+        setAlbumSongs(songs);
+    }
 
     useEffect(() => {
         if(sessionStorage != null) {
             setAlbumSongs(JSON.parse(sessionStorage));
             setLoading(false);
         }else{
-            getSongs();
+            getTrackInfo();
         }
-        
     }, [playlist_id]);
     
     return (
@@ -51,7 +39,10 @@ const SongBreakdown = () => {
                 {loading ? ( 
                     <Spinner className='text-center' animation="border" variant="dark"/>
                 ) : (
+                    <>
                     <SongsList albumSongs = {albumSongs}/>
+                    <h3>{albumSongs.length}</h3>
+                    </>
                 )}
             </div>
         </Container>

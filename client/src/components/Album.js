@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import '../CSS/Breakdown.css'
 import { Container, InputGroup, FormControl } from 'react-bootstrap';
 import { pitchConvertion, modeConvertion, signitureConvertion, msToMinutes } from "./UnitConverter";
 
+// Fix search by artist
 const SongsList = (albumSongs) => {
     
     const [songsList, setSongsList] = useState({});
@@ -52,6 +54,7 @@ const SongsList = (albumSongs) => {
                 return val;
             }));
             setPlayList(list);
+            trackSelected(list[0])
         }
 
         ModifyList();
@@ -59,10 +62,10 @@ const SongsList = (albumSongs) => {
     },[albumSongs]);
 
     return(
-        <Container style={{ display: "grid", gridTemplateColumns: "1fr 1fr", padding: "2px"}}>
+        <Container id="info-seperator">
             <Container className="selectedSong">
                 <>
-                    <Container className='text-left mt-4 mb-4' style={{ display: "grid", gridTemplateColumns: "1fr 1fr", padding: "2px"}}>
+                    <Container id="grid-format" className='text-left mt-4 mb-4'>
                         <Container className='mt-4 mb-4'>
                             <img
                             alt="playlist_cover"
@@ -78,7 +81,7 @@ const SongsList = (albumSongs) => {
                             <p>{songsList.release}</p>
                         </Container>
                     </Container>
-                    <Container className='text-left mt-4 mb-4' style={{ display: "grid", gridTemplateColumns: "1fr 1fr", padding: "2px"}}>
+                    <Container className='text-left mt-4 mb-4' id="grid-format">
                         <p>Loudness: {songsList.loudness} db</p>
                         <p>Acousticness: {songsList.acousticness}</p>
                         <p>Valence: {songsList.valence}</p>
@@ -112,9 +115,9 @@ const SongsList = (albumSongs) => {
                         }else if(track.track_info.songName.toLowerCase().includes(searchList.toLowerCase()) || track.track_info.artistName[0].toLowerCase().includes(searchList.toLowerCase())) {
                             return(track);
                         }
-                    }).map((track) => {
+                    }).map((track,i) => {
                         return(
-                            <Container onClick={() => trackSelected(track)} className="mt-4 mb-4" key={track.track_info.songId} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", padding: "2px", border: "1px solid black"}}>
+                            <Container onClick={() => trackSelected(track)} className="mt-4 mb-4" key={i+1} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", padding: "2px", border: "1px solid black"}}>
                                 <Container className="imageContainer mt-4 mb-4">
                                     <img
                                     alt="playlist_cover"
@@ -126,6 +129,7 @@ const SongsList = (albumSongs) => {
                                 <Container className="statsContainer mt-4 mb-4">
                                     <p>{track.track_info.songName}</p>
                                     <p>{track.track_info.artistName}</p>
+                                    <p>TrackNumber: {i+1}</p>
                                 </Container>
                             </Container>
                         )
