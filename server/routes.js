@@ -27,7 +27,8 @@ routes.route('/playlist/:id')
             })
             .catch(error => {
                 console.log("Error retrieving playlist object");
-                console.log(error);
+                console.log("code: " + error.code);
+                console.log("response: " + error.response.status + ": " + error.response.statusText + "\n");
                 res.send(error);
             })
     })
@@ -52,7 +53,8 @@ routes.route('/playlist/:id/images')
             })
             .catch(error => {
                 console.log("Error retrieving playlist images");
-                console.log(error);
+                console.log("code: " + error.code);
+                console.log("response: " + error.response.status + ": " + error.response.statusText + "\n");
                 res.send(error);
             })
     })
@@ -60,12 +62,12 @@ routes.route('/playlist/:id/images')
 /**
  * GET playlist tracks
  * https://developer.spotify.com/documentation/web-api/reference/#/operations/get-playlists-tracks
+ * ?market=ES&limit=3&offset=3
  */
-routes.route('/playlist/:id/tracks')
+routes.route('/playlist/:id/tracks/:offset?')
     .get(async function (req, res) {
         const access_token = await getAccessToken();
-        const api_url = `https://api.spotify.com/v1/playlists/${req.params.id}/tracks`;
-
+        const api_url = `https://api.spotify.com/v1/playlists/${req.params.id}/tracks?limit=100&offset=${req.params.offset}`;
         // make GET request to SPOTIFY API, sending access token 
         await axios.get(api_url, {
             headers: {
@@ -77,7 +79,8 @@ routes.route('/playlist/:id/tracks')
             })
             .catch(error => {
                 console.log("Error retrieving playlist tracks");
-                console.log(error);
+                console.log("code: " + error.code);
+                console.log("response: " + error.response.status + ": " + error.response.statusText + "\n");
                 res.send(error);
             })
     })
@@ -102,7 +105,8 @@ routes.route('/track/:id')
             })
             .catch(error => {
                 console.log("Error retrieving track object");
-                console.log(error);
+                console.log("code: " + error.code);
+                console.log("response: " + error.response.status + ": " + error.response.statusText + "\n");
                 res.send(error);
             })
     })
@@ -127,7 +131,8 @@ routes.route('/track/:id/audio-features')
             })
             .catch(error => {
                 console.log("Error retrieving track audio features");
-                console.log(error);
+                console.log("code: " + error.code);
+                console.log("response: " + error.response.status + ": " + error.response.statusText + "\n");
                 res.send(error);
             })
     })
