@@ -1,46 +1,27 @@
 import { useState, useEffect } from 'react';
-import { playlist_id } from './App.js';
 import { Container, Row, Col } from 'react-bootstrap';
-import { msToHours } from './components/UnitConverter';
-import Buttons from './components/Buttons';
+import GetPlaylistHeader from '../helper/GetPlaylistHeader';
+import Buttons from './Buttons';
 import Spinner from "react-bootstrap/Spinner";
 
-const axios = require('axios').default;
-let playlistLength = 0;
-
-const PlaylistHeading = () => {
+const PlaylistHeader = (id) => {
 
     const [playlistInfo, setPlaylistInfo] = useState({});
     const [loading, setLoading] = useState(true);
+    const [playlistLength, setPlaylistLength] = useState(0);
+    const playlistId = id.playlistId;
 
     useEffect(() => {
-
-        const playlistName = axios.get(`/playlist/${playlist_id}`);
-        const playlistCover = axios.get(`/playlist/${playlist_id}/images`)
-        const playlistTracks = axios.get(`/playlist/${playlist_id}/tracks/${0}`)
-
         setLoading(true);
-        // errors to handle: 
-        // 404 when playlist is not found / is private 
-        axios.all([playlistName, playlistCover, playlistTracks])
-            .then(axios.spread((...responses) => {
-                let playlist = {
-                    name: responses[0].data.name,
-                    coverUrl: responses[1].data[0].url,
-                    description: responses[0].data.description,
-                    owner: responses[0].data.owner.display_name,
-                    numberOfSongs: responses[2].data.total,
-                    duration: msToHours(responses[2].data.items),
-                    likes: responses[0].data.followers.total
-                }
-                setPlaylistInfo(playlist);
-                playlistLength = playlist.numberOfSongs;
-                setLoading(false);
-            }))
-            .catch(error => {
-                console.log(error);
-            })
-    }, [playlist_id]);
+        const setHeader = async() => {
+            const headerList = await GetPlaylistHeader(playlistId);
+            setPlaylistInfo(headerList);
+            setPlaylistLength(headerList.numberOfSongs);
+            setLoading(false);
+        }
+
+        setHeader();
+    }, [playlistId]);
 
     return <>
         <Container className="justify-content-md-center mt-5 mb-5">
@@ -67,7 +48,7 @@ const PlaylistHeading = () => {
                             </Col>
                         </Row>
                         <Container className='justify-content-md-center mt-5 mb-5'>
-                            <Buttons/>
+                            <Buttons playlistId={playlistId} playlistLength={playlistLength}/>
                         </Container>
                 </Container>
             )}
@@ -76,4 +57,4 @@ const PlaylistHeading = () => {
     </>
 }
 
-export {PlaylistHeading, playlistLength};
+export default PlaylistHeader;

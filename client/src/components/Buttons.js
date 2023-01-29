@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import SongBreakdown from '../SongBreakdown';
-import Analysis from '../Analysis';
 import { Button, Stack, Container } from 'react-bootstrap';
+import SongBreakdown from './SongBreakdown';
+import Analysis from './Analysis';
 
-const Buttons = () => {
+const Buttons = (id) => {
 
-    const [showSongBreakdown, setShowSongBreakdown] = useState(false)
-    const [showAnalysis, setShowAnalysis] = useState(false)
+    const [showSongBreakdown, setShowSongBreakdown] = useState(false);
+    const [showAnalysis, setShowAnalysis] = useState(false);
+    const playlistId = id.playlistId;
+    const playlistLength = id.playlistLength;
 
     return <>
         <Container>
@@ -18,8 +20,8 @@ const Buttons = () => {
             </Stack>
         </Container>
         <Container>
-            {showSongBreakdown && <SongBreakdown />}
-            {showAnalysis && <Analysis />}
+            {showSongBreakdown && <SongBreakdown playlistId={playlistId} playlistLength={playlistLength}/>}
+            {showAnalysis && <Analysis playlistId={playlistId}/>}
         </Container>
     </>
 }

@@ -1,63 +1,30 @@
-import React, { useEffect, useState } from "react";
-import '../CSS/Breakdown.css'
+import { useEffect, useState } from "react";
 import { Container, InputGroup, FormControl } from 'react-bootstrap';
-import { pitchConvertion, modeConvertion, signitureConvertion, msToMinutes } from "./UnitConverter";
+import { pitchConvertion, modeConvertion, signitureConvertion, msToMinutes } from "../helper/UnitConverter";
+import '../CSS/Breakdown.css';
 
 // Fix search by artist
-const SongsList = (albumSongs) => {
+const Playlist = (albumSongs) => {
     
     const [songsList, setSongsList] = useState({});
     const [playList, setPlayList] = useState([]);
-    const [searchList, setSearchList] = useState("");
+    const [searchList, setSearchList] = useState('');
 
     const trackSelected = (track) => {
         setSongsList(songsList => ({
             ...songsList,
-            ...track.track_info
+            ...track
         }));
     };
 
-    const fullArtist = (artist) => {
-        let names = "";
-        artist.map((val => {
-            return names += (val.name + ", ");
-        }))
-        names = names.substring(0, names.length - 2);
-        return names;
-    }
-
     useEffect(() => {
-        const ModifyList = async() => {
-            const list = await Promise.all(albumSongs.albumSongs.map(async(val) => {
-                const images = val.track.album.images.map((val) => {return val.url});
-                const artistNames = fullArtist(val.track.artists);
-                const year = new Date(val.track.album.release_date)
-                let track_info = {
-                    songId: val.track.id,
-                    albumName: val.track.album.name,
-                    songName: val.track.name,
-                    artistName: artistNames,
-                    release: year.getFullYear(),
-                    imageUrl: images[1],
-                    danceability: val.audio_stats.danceability,
-                    energy: val.audio_stats.energy,
-                    loudness: val.audio_stats.loudness,
-                    acousticness: val.audio_stats.acousticness,
-                    valence: val.audio_stats.valence,
-                    tempo: val.audio_stats.tempo,
-                    timeSignature: val.audio_stats.time_signature,
-                    duration: val.audio_stats.duration_ms,
-                    mode: val.audio_stats.mode,
-                    key: val.audio_stats.key
-                };
-                val["track_info"] = track_info;
-                return val;
-            }));
-            setPlayList(list);
-            trackSelected(list[0])
-        }
 
-        ModifyList();
+        const setValues = async() => {
+            setPlayList(albumSongs.albumSongs);
+            trackSelected(albumSongs.albumSongs[0]);
+        }
+        
+        setValues();
         
     },[albumSongs]);
 
@@ -110,25 +77,23 @@ const SongsList = (albumSongs) => {
                 </InputGroup>
                 <Container style={{ height: "500px", overflowY: "scroll"}}>
                     {playList.filter((track) => {
-                        if(searchList === "") {
-                            return(track);
-                        }else if(track.track_info.songName.toLowerCase().includes(searchList.toLowerCase()) || track.track_info.artistName[0].toLowerCase().includes(searchList.toLowerCase())) {
-                            return(track);
-                        }
+                        return searchList.toLowerCase() === ''
+                        ? track
+                        : track.songName.toLowerCase().includes(searchList.toLowerCase()) || track.artistNames.toLowerCase().includes(searchList.toLowerCase())
                     }).map((track,i) => {
                         return(
                             <Container onClick={() => trackSelected(track)} className="mt-4 mb-4" key={i+1} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", padding: "2px", border: "1px solid black"}}>
                                 <Container className="imageContainer mt-4 mb-4">
                                     <img
                                     alt="playlist_cover"
-                                    src={track.track_info.imageUrl}
+                                    src={track.imageUrl}
                                     width="80"
                                     height="80"
                                     className='img-fluid shadow-2-strong'/>
                                 </Container>
                                 <Container className="statsContainer mt-4 mb-4">
-                                    <p>{track.track_info.songName}</p>
-                                    <p>{track.track_info.artistName}</p>
+                                    <p>{track.songName}</p>
+                                    <p>{track.artistName}</p>
                                     <p>TrackNumber: {i+1}</p>
                                 </Container>
                             </Container>
@@ -140,4 +105,4 @@ const SongsList = (albumSongs) => {
     )
 };
 
-export { SongsList };
+export default Playlist;
